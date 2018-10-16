@@ -1,0 +1,56 @@
+	var EventUtil={
+	
+		addHandler:function(element,type,handler){	//添加事件
+
+			if(element.addEventListen){		//用dom2级添加事件
+				element.addEvenemtListener(element,type,false)
+			}else if(element.attachEvent){		//用IE方法添加事件
+				element.attachEvent("on"+type,handler)
+			}else{					//用dom0级方法添加事件
+				element["on"+type]=handler
+			}	
+			},
+
+		
+		removeHandler:function(element,type,handler){	//取消事件
+				if(element.removeEventListener){
+					element.removeEvenemtListener(type,handler,false)
+				}else if(element.detachEvent){
+					element.detachEvent("on"+type,handler)
+				}else{
+					element["on"+type]=null
+				}
+
+
+			},
+		
+		
+		getEvent:function(event){		//使用这个方法获取跨浏览器对象
+			return event?event:window.event
+			},
+
+		getTarget:function(event){		//返回事件的实际目标
+			return event.target||event.srcElement
+			
+			},
+		
+		preventDefault:function(event){		//阻止事件默认行为
+			if(evenet.preventDefault){
+				event.preventDefault()
+			}else{
+				event.returnValue=false
+			}
+			
+			}
+
+
+
+
+
+
+
+
+
+
+
+}
