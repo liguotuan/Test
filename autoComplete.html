@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+<input id="input" name="">
+<ul id='ul'></ul>
+
+</body>
+<script>
+    window.onload = function(){
+
+        var input = document.getElementById('input')
+        var ul = document.getElementById('ul')
+        var arr = ['a','ab','ac','ba','bac','bdd','abcdefg']
+
+        input.addEventListener('focus',function(event){     //当input获得焦点时ul显示
+            ul.style.display = "block"
+
+        })
+
+        input.addEventListener('input', function(event){    //给input添加监听
+            var _value = event.target.value.trim()          //清除输入数据前后的空格
+
+            if(_value){
+                auto(_value,arr)
+
+            }else{
+                ul.innerHTML = ''
+
+            }
+
+
+
+        },false)
+
+        ul.addEventListener('click', function(event){
+            var target = event.target
+            if(target.nodeName.toLowerCase()=='li'){
+                addToInput(target)
+
+            }
+            this.style.display = 'none'
+
+        })
+
+
+            function auto(str, arr){
+                var lis = []
+                arr.forEach(element=>{
+                    if(element.includes(str)){
+                        lis.push('<li>'+element+'</li>')
+                    }
+
+                 })
+                  ul.innerHTML = lis.join("")
+              }
+
+              function addToInput(li){
+                var _txt = li.innerText
+                input.value = _txt
+
+              }
+
+    }
+
+</script>
+</html>
