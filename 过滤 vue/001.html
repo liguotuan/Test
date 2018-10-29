@@ -5,10 +5,9 @@
     <title>Document</title>
 </head>
 <body>
-<input type="" id="input" name="">
-<ul id="ul"></ul>
 
-    <div id="test" style="position: fixed;">
+
+    <div id="test">
         <input type="" name="" v-model="search">
         <ul>
             <li v-for="(p,index) in fPersons" :key="index">
@@ -25,57 +24,6 @@
 <script src="vue.min.js"></script>
 <script>
     window.onload = function(){
-        input = document.getElementById("input")
-        ul = document.getElementById("ul")
-
-        var arr = ['a','b','c','c','abc','kjg','abcdefg']
-
-        input.addEventListener('focus', function(){
-            ul.style.display = "block"
-        },false)
-
-        input.addEventListener('input',function(event){
-            var _value = event.target.value
-            if(_value){
-                auto(_value,arr)
-
-            }else{
-               ul.innerHTML = ""
-
-            }
-
-        },false)
-
-        ul.addEventListener('click', function(event){
-            var target = event.target
-            if(target.nodeName.toUpperCase() == 'LI'){
-                addToInput(target)
-            }
-            ul.style.display = "none"
-
-        }, false)
-
-        function addToInput(li){
-            var _txt = li.innerText
-            input.value = _txt
-
-
-        }
-
-        function auto(str,arr){
-            var lis = []
-            arr.forEach(function(element){
-                if(element.includes(str)){
-                    lis.push(`<li>${element}</li>`)
-
-                }
-
-            })
-            console.log(ul.innerHTML);
-            ul.innerHTML = lis.join('')
-            console.log(ul.innerHTML);
-
-        }
 
         new Vue({
             el:"#test",
@@ -108,16 +56,16 @@
 
 
                    let one
-                        one = persons.filter(function(p){
+                        one = persons.filter(function(p){    //过滤所有persons
                             return Object.keys(p).some(function(key){
-                                return String(p[key]).toLowerCase().indexOf(search) !== -1
+                                return String(p[key]).toLowerCase().indexOf(search) !== -1 //过滤的产品名
                             })
                         })
 
 
                     if(order!==0){
-                            one.sort(function(p1,p2){
-                                if(order==2){
+                            one.sort(function(p1,p2){  
+                                if(order==2){   
                                     return p2.age - p1.age
 
                                 }else{
